@@ -19,6 +19,27 @@ module.exports.deleteSongById=(req,res,next)=>{
 
     Song.deleteOne({_id:id})
         .then(()=>res.status(200).json({Message:"Deleted successfully"}))
-        .catch(err=>res.status(500).json(err))
-        
+        .catch(err=>res.status(500).json(err)) 
 }
+
+
+//get song by ID
+module.exports.getSongById=(req,res,next)=>{
+    const {id} = req.params;
+
+    Song.findById(id)
+        .then((song)=>res.status(200).json(song))
+        .catch(err=>res.status(500).json(err)) 
+}
+
+
+//get song by Name 
+module.exports.findSongByName=(req,res,next)=>{
+    const {Name} = req.headers;
+    console.log(req.header)
+
+    Song.findById(id)
+        .then((song)=>res.status(200).json(song))
+        .catch(err=>res.status(500).json(err)) 
+}
+

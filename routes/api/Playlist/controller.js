@@ -26,3 +26,41 @@ module.exports.deletePlaylistById=(req,res,next)=>{
         .catch(err=>res.status(500).json(err))
         
 }
+
+
+//update tat ca, 
+module.exports.updatePlaylistById = (req,res,next)=>{
+    const {id} = req.params;
+
+ 
+    Playlist.findById(id)
+        .then(Playlist=>{
+            if(!Playlist) Promise.reject("Playlist not found")
+
+            Object.keys(req.body).forEach(key=>Playlist[key]=req.body[key])
+            return Playlist.save()
+        })
+        .then(Playlist=>res.status(200).json(Playlist))
+        .catch(err=>res.status(500).json(err))
+    
+
+}
+
+//them songs vao IDSongs
+module.exports.addMoreSongs = (req,res,next)=>{
+    const {id} = req.params;
+    const songs = req.body.IDSongs
+
+ 
+    Playlist.findById(id)
+        .then(Playlist=>{
+            if(!Playlist) Promise.reject("Playlist not found")
+            
+            Playlist.IDSongs.push(...songs)
+            return Playlist.save()
+        })
+        .then(Playlist=>res.status(200).json(Playlist))
+        .catch(err=>res.status(500).json(err))
+    
+
+}
