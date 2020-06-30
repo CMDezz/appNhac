@@ -5,9 +5,35 @@ module.exports.getPlaylist=(req,res,next)=>{
     Playlist.find()
         // .populate("IDSongs")
         // .populate("IDTopics")
-        .then(songs=>res.status(200).json(songs))
+        .then(playlist=>res.status(200).json(playlist))
         .catch(err=>res.status(500).json(err))
 }
+
+
+module.exports.getRandom4Playlist=(req,res,next)=>{
+    Playlist.find()
+        // .populate("IDSongs")
+        // .populate("IDTopics")
+        .then(playlist=>{
+            let i= 0;
+            let arr=[];
+            let temp =[]
+            while (i<4){
+                
+               let ran =  Math.floor(Math.random() * 4); 
+               if(!temp.includes(ran)){
+                temp.push(ran)
+                arr.push(playlist[ran])
+                i++
+               }
+              
+            }
+            return arr
+        })
+        .then(playlist=>res.status(200).json(playlist))
+        .catch(err=>res.status(500).json(err))
+}
+
 
 module.exports.createPlaylist=(req,res,next)=>{
     const {IDSongs,PlaylistName,PlaylistImage,PlaylistIcon} = req.body;

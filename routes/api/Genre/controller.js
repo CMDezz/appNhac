@@ -18,8 +18,7 @@ module.exports.getListNameGenre=(req,res,next)=>{
         // .populate("IDTopics")
         .populate({path:"IDTopics",select:"_id TopicName"})
         .then(songs=>{
-            songs.map(s=>arr.push(s.GenreName))
-            console.log(arr)
+            songs.map(s=>arr.push(`${s.GenreName} -- id : ${s._id}`))
             return arr
         })
         .then(arr=>res.status(200).json(arr))
