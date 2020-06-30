@@ -1,5 +1,5 @@
 const {Playlist} = require('./../../../models/Playlist');
-let Ar ;
+let Ar =[1,2,3,4];
 var schedule = require('node-schedule');
 const axios = require('axios');
 //1 gio 1 phut 1 giay
