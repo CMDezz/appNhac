@@ -1,4 +1,46 @@
-const {Playlist} = require('./../../../models/Playlist')
+const {Playlist} = require('./../../../models/Playlist');
+let Ar ;
+var schedule = require('node-schedule');
+const axios = require('axios');
+//1 gio 1 phut 1 giay
+var ranPerDay = schedule.scheduleJob('2 2 2 * * *', async function(){
+    let num = 0;
+    let i = 0
+    var ranAr=[];
+    await axios.get('https://giadinhmusicapp.herokuapp.com/api/Playlists/')
+    .then(playlists=>{
+        num = (playlists.data.length)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    while(i<4){
+        let ran =  Math.floor(Math.random() *  num); 
+        if(!ranAr.includes(ran)) {
+            ranAr.push(ran);
+            i++;
+        }
+    }
+    Ar=ranAr
+    console.log(Ar)
+});
+// console.log(ar)
+// console.log("123")
+
+
+
+// https://stackoverflow.com/questions/51301301/how-would-i-get-a-function-to-run-every-24-hours-on-a-server/51301855
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports.getPlaylist=(req,res,next)=>{
@@ -8,27 +50,21 @@ module.exports.getPlaylist=(req,res,next)=>{
         .then(playlist=>res.status(200).json(playlist))
         .catch(err=>res.status(500).json(err))
 }
+module.exports.setAr=(ar)=>{
+    Ar=ar;
+    // console.log(Ar)
+    return Ar;
+}
 
 
-module.exports.getRandom4Playlist=(req,res,next)=>{
+module.exports.getTodayPlaylist=(req,res,next)=>{
+    console.log(Ar)
     Playlist.find()
         // .populate("IDSongs")
         // .populate("IDTopics")
         .then(playlist=>{
-            let i= 0;
-            let arr=[];
-            let temp =[]
-            while (i<4){
-                
-               let ran =  Math.floor(Math.random() * 4); 
-               if(!temp.includes(ran)){
-                temp.push(ran)
-                arr.push(playlist[ran])
-                i++
-               }
-              
-            }
-            return arr
+        //    console.log(ar)
+            return Ar.map(n=>playlist[n])
         })
         .then(playlist=>res.status(200).json(playlist))
         .catch(err=>res.status(500).json(err))
