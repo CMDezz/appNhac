@@ -26,7 +26,7 @@ module.exports.deleteAlbumById=(req,res,next)=>{
         .catch(err=>res.status(500).json(err))
         
 }
-
+//update tat ca, 
 module.exports.updateAlbumById = (req,res,next)=>{
     const {id} = req.params;
 
@@ -44,7 +44,7 @@ module.exports.updateAlbumById = (req,res,next)=>{
 
 }
 
-
+//them songs vao IDSongs
 module.exports.addMoreSongs = (req,res,next)=>{
     const {id} = req.params;
     const songs = req.body.IDSongs
@@ -55,7 +55,6 @@ module.exports.addMoreSongs = (req,res,next)=>{
             if(!album) Promise.reject("Album not found")
             
             album.IDSongs.push(...songs)
-            // // Object.keys(req.body).forEach(key=>album[key]=req.body[key])
             return album.save()
         })
         .then(album=>res.status(200).json(album))

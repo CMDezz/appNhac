@@ -8,6 +8,7 @@ module.exports.getAds =(req,res,next)=>{
         .then(ads=>res.status(200).json(ads))
         .catch(err=>res.status(500).json(err))
 }
+
 module.exports.createAds=(req,res,next)=>{
     const {IDSong,SongName,SongImage,AdsImage,AdsContent} = req.body;
  
