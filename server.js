@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var {ranPerDay} = require('./routes/api/Playlist/controller')
 const config = require('./config/index.js');
 
 mongoose.connect(config.mongodbUri,{

@@ -1,9 +1,9 @@
 const {Playlist} = require('./../../../models/Playlist');
-let Ar =[1,2,3,4];
+let Ar =[0,1,2,3];
 var schedule = require('node-schedule');
 const axios = require('axios');
-//1 gio 1 phut 1 giay
-var ranPerDay = schedule.scheduleJob('2 2 2 * * *', async function(){
+//2 gio 2 phut 2 giay
+var ranPerDay = schedule.scheduleJob('2 25 8 * * *', async function(){
     let num = 0;
     let i = 0
     var ranAr=[];
