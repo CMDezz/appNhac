@@ -5,7 +5,8 @@ const SongSchema = mongoose.Schema({
     SongName : {type:String,required:true},
     SongImage:{type:String,required:true},
     SongSinger:{type:String,required:true},
-    SongLink : {type:String,required:true}
+    SongLink : {type:String,required:true},
+    Likes:{type:Number,required:false}
 })
 
 const Song = mongoose.model("Song",SongSchema,"Song");

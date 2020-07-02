@@ -61,3 +61,15 @@ module.exports.addMoreSongs = (req,res,next)=>{
     
 
 }
+
+//mostlike songs
+module.exports.get5LikestSongs = (req,res,next)=>{
+    Song.find()
+        .sort({Likes:-1})
+        .limit(5)
+        .then(Song=>res.status(200).json(Song))
+        .catch(err=>res.status(500).json(err))
+}
+
+
+

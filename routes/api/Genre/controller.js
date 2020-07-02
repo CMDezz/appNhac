@@ -1,5 +1,5 @@
 const {Genre} = require('./../../../models/Genre')
-
+const {Song} = require('./../../../models/Song')
 
 module.exports.getGenre=(req,res,next)=>{
     Genre.find()
@@ -108,4 +108,13 @@ module.exports.addMoreTopics = (req,res,next)=>{
         .catch(err=>res.status(500).json(err))
     
 
+}
+
+
+// get songs of a genre
+module.exports.getSongs =(req,res,next)=>{
+    const {id} = req.params
+    Song.find({IDGenre:{"$in":[id]}})
+        .then(songs=> res.status(200).json(songs))
+        .catch(err=>res.status(500).json(err))
 }

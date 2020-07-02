@@ -1,4 +1,6 @@
 const {Playlist} = require('./../../../models/Playlist');
+
+
 let Ar =[0,1,2,3];
 var schedule = require('node-schedule');
 const axios = require('axios');
@@ -120,5 +122,12 @@ module.exports.addMoreSongs = (req,res,next)=>{
         .then(Playlist=>res.status(200).json(Playlist))
         .catch(err=>res.status(500).json(err))
     
+
+}
+
+
+//getSongsOfAPlaylist
+module.exports.getSongs=(req,res,next)=>{
+
 
 }
