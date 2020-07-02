@@ -2,7 +2,7 @@ const {Genre} = require ("./../../models/Genre");
 const {Topic} = require ("./../../models/Topic");
 
 
-let Ar =[[0,1,2,3],[0,1,2,3]];
+let Ar =[[0,1,2,3],[11,3,9,6]];
 var schedule = require('node-schedule');
 const axios = require('axios');
 
