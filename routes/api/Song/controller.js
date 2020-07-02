@@ -43,3 +43,21 @@ module.exports.findSongByName=(req,res,next)=>{
         .catch(err=>res.status(500).json(err)) 
 }
 
+//them genresID
+module.exports.addMoreSongs = (req,res,next)=>{
+    const {id} = req.params;
+    const IDGenre = req.body.IDGenre
+
+ 
+    Song.findById(id)
+        .then(Song=>{
+            if(!Song) Promise.reject("Song not found")
+            
+            Song.IDGenre.push(...IDGenre)
+            return Song.save()
+        })
+        .then(Song=>res.status(200).json(Song))
+        .catch(err=>res.status(500).json(err))
+    
+
+}

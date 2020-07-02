@@ -11,6 +11,7 @@ router.use("/Songs",require('./Song'));
 router.use("/Topics",require('./Topic'));
 
 router.use("/getGenreAndTopic",overController.getGenreAndTopic);
+router.get("/getTodayTopicAndGenre",overController.getTodayGenreAndTopic)
 
 
 module.exports=router;
