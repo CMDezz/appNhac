@@ -7,4 +7,7 @@ router.post("/",AlbumController.createGenre);
 router.delete("/:id",AlbumController.deleteAlbumById);
 router.put("/:id",AlbumController.updateAlbumById);
 router.patch("/:id",AlbumController.addMoreSongs);
+
+router.get("/getTodayAlbum",AlbumController.getTodayAlbum);
+
 module.exports=router;
