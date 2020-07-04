@@ -27,11 +27,12 @@ module.exports.deleteAdsById=(req,res,next)=>{
 }
 
 module.exports.getSongOfaAds=(req,res,next)=>{
-    const {id} = req.params;
+    const {idquangcao} = req.body;
     
-    Ads.findById({_id:id})
+    Ads.findById({_id:idquangcao})
     .populate("IDSong")
-        .then((ads)=>res.status(200).json(ads.IDSong))
+    .then(ads=> [ads.IDSong])
+        .then((songs)=>res.status(200).json(songs))
         .catch(err=>res.status(500).json(err))
         
 }

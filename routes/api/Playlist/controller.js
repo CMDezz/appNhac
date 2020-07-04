@@ -24,7 +24,6 @@ var ranPerDay = schedule.scheduleJob('2 25 8 * * *', async function(){
         }
     }
     Ar=ranAr
-    console.log(Ar)
 });
 // console.log(ar)
 // console.log("123")
@@ -56,7 +55,6 @@ module.exports.getPlaylist=(req,res,next)=>{
 
 
 module.exports.getTodayPlaylist=(req,res,next)=>{
-    console.log(Ar)
     Playlist.find()
         // .populate("IDSongs")
         // .populate("IDTopics")
@@ -128,6 +126,11 @@ module.exports.addMoreSongs = (req,res,next)=>{
 
 //getSongsOfAPlaylist
 module.exports.getSongs=(req,res,next)=>{
+    const {idplaylist} = req.body;
 
+    Playlist.findById({_id:idplaylist}) 
+        .populate("IDSongs")
+        .then(songs=>res.status(200).json(songs.IDSongs))
+        .catch(err=>res.status(500).json(err))
 
 }
