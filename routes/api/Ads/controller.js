@@ -10,9 +10,9 @@ module.exports.getAds =(req,res,next)=>{
 }
 
 module.exports.createAds=(req,res,next)=>{
-    const {IDSong,SongName,SongImage,AdsImage,AdsContent} = req.body;
+    const {IDSong,AdsImage,AdsContent} = req.body;
  
-    Ads.create({IDSong,SongName,SongImage,AdsImage,AdsContent})
+    Ads.create({IDSong,AdsImage,AdsContent})
         .then(song=>res.status(200).json(song))
         .catch(err=>res.status(500).json(err))
 }
@@ -28,10 +28,13 @@ module.exports.deleteAdsById=(req,res,next)=>{
 
 module.exports.getSongOfaAds=(req,res,next)=>{
     const {idquangcao} = req.body;
-    
+    let ar = []
     Ads.findById({_id:idquangcao})
     .populate("IDSong")
-    .then(ads=> [ads.IDSong])
+        .then(ads=>{
+            ar.push(...ads.IDSong)
+            return ar
+        })
         .then((songs)=>res.status(200).json(songs))
         .catch(err=>res.status(500).json(err))
         
