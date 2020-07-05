@@ -4,12 +4,12 @@ const router= express.Router();
 
 router.get("/",GenreController.getGenre);
 router.get("/onlyName",GenreController.getListNameGenre);
-router.get("/getSongs/:id",GenreController.getSongs);
+router.post("/getSongs",GenreController.getSongs);
 
 router.post("/",GenreController.createGenre);
 router.delete("/:id",GenreController.deleteGenreById)
 router.delete("/",GenreController.deleteAllGenre)
 router.put("/:id",GenreController.updateGenreById);
 router.patch("/:id",GenreController.addMoreTopics);
-router.get("/getGenresOfATopic/:id",GenreController.getTopic)
+router.post("/getGenresOfATopic",GenreController.getTopic)
 module.exports=router;

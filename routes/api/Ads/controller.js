@@ -10,9 +10,9 @@ module.exports.getAds =(req,res,next)=>{
 }
 
 module.exports.createAds=(req,res,next)=>{
-    const {IDSong,AdsImage,AdsContent} = req.body;
+    const {IDSong,AdsTitle,AdsImage,AdsContent} = req.body;
  
-    Ads.create({IDSong,AdsImage,AdsContent})
+    Ads.create({IDSong,AdsImage,AdsTitle,AdsContent})
         .then(song=>res.status(200).json(song))
         .catch(err=>res.status(500).json(err))
 }
@@ -41,3 +41,18 @@ module.exports.getSongOfaAds=(req,res,next)=>{
 }
 
 
+module.exports.updateAds =(req,res,ext)=>{
+    const {id} = req.params;
+
+    Ads.findById(id)
+        .then(ad=>{
+            if(!ad) Promise.reject("Ads not found!")
+
+            Object.keys(req.body).forEach(key=>ad[key]=req.body[key])
+
+            return ad.save()
+        })
+        .then(ad=>res.status(200).json(ad))
+        .catch(err=>res.status(500).json(err))
+    
+}

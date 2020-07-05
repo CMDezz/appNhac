@@ -73,3 +73,23 @@ module.exports.get5LikestSongs = (req,res,next)=>{
 
 
 
+ //update like of a song
+module.exports.updateLike = (req,res,next)=>{
+    const {luotthich,idbaihat} =req.body;
+    Song.findById({_id:idbaihat})
+        .then(Song=>{
+             Song.Likes += luotthich
+             return Song.save();
+        })
+        .then(Song=>res.status(200).json({message:"Like success!"}))
+        .catch(err=>res.status(500).json(err))
+}
+
+module.exports.findSong = (req,res,next)=>{
+    const {tukhoa} = req.body;
+    var re = new RegExp(tukhoa,"gi");
+    Song.find({SongName:re})
+        .then(song=>res.status(200).json(song))
+        .catch(err=>res.status(500).json(err))
+}
+

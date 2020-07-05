@@ -6,6 +6,9 @@ router.get("/",SongController.getSong);
 router.get("/getById/:id",SongController.getSongById);
 
 router.post("/",SongController.createSong);
+router.post("/updateLikes",SongController.updateLike);
+router.post("/findSong",SongController.findSong)
+
 router.delete("/:id",SongController.deleteSongById)
 router.patch("/:id",SongController.addMoreSongs)
 

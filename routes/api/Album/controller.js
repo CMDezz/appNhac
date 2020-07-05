@@ -1,3 +1,5 @@
+const {Song} = require('./../../../models/Song')
+
 const {Album} = require('./../../../models/Album')
 const _ = require('lodash')
 const { isEmpty } = require('lodash')
@@ -49,6 +51,21 @@ module.exports.getTodayAlbum=(req,res,next)=>{
         .catch(err=>res.status(500).json(err))
 }
 
+
+//get songs of  an album
+
+module.exports.getSongs=(req,res,next)=>{
+    const {idalbum}=req.body;
+    let ar = []
+    Album.findById({_id:idalbum})
+    .populate("IDSongs")
+        .then(album=>{
+            ar.push(...album.IDSongs)
+            return ar
+        })
+        .then(songs=>res.status(200).json(songs))
+        .catch(err=>res.status(500).json(err))
+}
 
 
 module.exports.getGenre=(req,res,next)=>{

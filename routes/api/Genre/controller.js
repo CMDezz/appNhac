@@ -26,10 +26,10 @@ module.exports.getListNameGenre=(req,res,next)=>{
 }
 //get genres of a topic 
 module.exports.getTopic=(req,res,next)=>{
-    const {id} = req.params;
+    const {idchude} = req.body;
 
-    Genre.find({IDTopics:id})
-    .populate({path:"IDTopics",select:"_id TopicName"})
+    Genre.find({IDTopics:idchude})
+    // .populate({path:"IDTopics",select:"_id TopicName"})
         .then(songs=>res.status(200).json(songs))
         .catch(err=>res.status(500).json(err))
 }
@@ -113,8 +113,8 @@ module.exports.addMoreTopics = (req,res,next)=>{
 
 // get songs of a genre
 module.exports.getSongs =(req,res,next)=>{
-    const {id} = req.params
-    Song.find({IDGenre:{"$in":[id]}})
+    const {idtheloai} = req.body;
+    Song.find({IDGenre:{"$in":[idtheloai]}})
         .then(songs=> res.status(200).json(songs))
         .catch(err=>res.status(500).json(err))
 }
